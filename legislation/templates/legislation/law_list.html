@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Osun Laws & Bills</title>
+  </head>
+  <body>
+    <h1>📜 Osun State Laws & Bills</h1>
+    {% if laws %}
+    <ul>
+      {% for law in laws %}
+      <li>
+        <a href="{% url 'law_detail' law.pk %}"> {{ law.title }} </a>
+        <p>{{ law.description|truncatewords:20 }}</p>
+        <hr />
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No laws or bills available yet.</p>
+    {% endif %}
+  </body>
+</html>

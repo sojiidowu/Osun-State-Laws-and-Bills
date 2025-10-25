@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ law.title }}</title>
+  </head>
+  <body>
+    <h1>{{ law.title }}</h1>
+    <p>{{ law.description }}</p>
+    <p>Category: {{ law.category.name }}</p>
+    <p>Price: ₦{{ law.price }}</p>
+
+    {% if law.file %}
+    <a href="{{ law.file.url }}" download>Download Document</a>
+    {% else %}
+    <p>No document available.</p>
+    {% endif %}
+
+    <hr />
+    <a href="{% url 'law_list' %}">⬅ Back to list</a>
+  </body>
+</html>
