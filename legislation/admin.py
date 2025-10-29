@@ -18,7 +18,12 @@ class BillOrLawAdmin(admin.ModelAdmin):
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ('user', 'bill_or_law', 'amount',
-                    'status', 'reference')
+    list_display = ('full_name', 'bill_or_law', 'amount',
+                    'status')
     list_filter = ['status']
-    search_fields = ['reference', 'user__username']
+    search_fields = ['full_name']
+
+    # list_display = ('user', 'bill_or_law', 'amount',
+    # 'status', 'reference')
+    # list_filter = ['status']
+    # search_fields = ['reference', 'user__username']

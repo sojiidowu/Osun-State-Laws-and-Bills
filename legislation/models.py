@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 
 
 class Category(models.Model):
@@ -33,18 +33,30 @@ class BillOrLaw(models.Model):
 
 
 class Payment(models.Model):
-    STATUS_CHOICES = [
-        ("PENDING", "Pending"),
-        ("SUCCESS", "Success"),
-        ("FAILED", "Failed"),
-    ]
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    bill_or_law = models.ForeignKey("BillOrLaw", on_delete=models.CASCADE)
-    amount = models.DecimalField(max_digits=8, decimal_places=2)
-    status = models.CharField(
-        max_length=10, choices=STATUS_CHOICES, default="PENDING")
-    payment_date = models.DateTimeField(auto_now_add=True)
-    reference = models.CharField(max_length=100, unique=True)
+    bill_or_law = models.ForeignKey(BillOrLaw, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=100, null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=20, default='pending')
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user.username} - {self.bill_or_law.title}"
+        return f"Payment for {self.bill_or_law.title} - {self.status}"
+
+
+# class Payment(models.Model):
+#    STATUS_CHOICES = [
+#        ("PENDING", "Pending"),
+#        ("SUCCESS", "Success"),
+#        ("FAILED", "Failed"),
+#    ]
+#    user = models.ForeignKey(User, on_delete=models.CASCADE)
+#    bill_or_law = models.ForeignKey("BillOrLaw", on_delete=models.CASCADE)
+#    amount = models.DecimalField(max_digits=8, decimal_places=2)
+#    status = models.CharField(
+#        max_length=10, choices=STATUS_CHOICES, default="PENDING")
+#    payment_date = models.DateTimeField(auto_now_add=True)
+#    reference = models.CharField(max_length=100, unique=True)
+
+#    def __str__(self):
+#        return f"{self.user.username} - {self.bill_or_law.title}"
