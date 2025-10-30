@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mock Payment - {{ law.title }}</title>
+  </head>
+  <body>
+    <h1>💳 Mock Payment</h1>
+    <p>You are paying for: <strong>{{ law.title }}</strong></p>
+    <p>Amount: ₦{{ law.price }}</p>
+
+    <form methods="POST">
+      {% csrf_token %}
+      <label>Full Name:</label><br />
+      <input type="text" name="full_name" required /><br /><br />
+
+      <label>Email:</label><br />
+      <input type="text" name="email" required /><br /><br />
+
+      <button type="submit">Complete Payment</button>
+    </form>
+
+    <hr />
+    <a href="{% url 'law_detail' law.pk %}">⬅ Back to law</a>
+  </body>
+</html>

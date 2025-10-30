@@ -11,10 +11,12 @@
     <p>Category: {{ law.category.name }}</p>
     <p>Price: ₦{{ law.price }}</p>
 
-    {% if law.file %}
-    <a href="{{ law.file.url }}" download>Download Document</a>
+    {% if law.price == 0 %}
+    <a href="{% url 'download_law' law.pk %}">Download for Free</a>
     {% else %}
-    <p>No document available.</p>
+    <a href="{% url 'mock_payment' law.pk  %}"
+      >Pay & Download (₦{{ law.price }})</a
+    >
     {% endif %}
 
     <hr />
